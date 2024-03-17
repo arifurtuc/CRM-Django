@@ -1,0 +1,28 @@
+{% extends "clientapp/base.html" %} {% load crispy_forms_tags %}
+
+<!-- Content block for the registration form -->
+{% block content %}
+<div class="registration-form">
+  <br />
+  <h3 class="text-center">Create your account</h3>
+  <hr />
+
+  <!-- Form for user registration -->
+  <form method="POST" autocomplete="off">
+    {% csrf_token %} {{form|crispy}}
+    <br />
+    <button type="submit" class="btn btn-dark w-100 btn-block p-2">
+      Create Account
+    </button>
+  </form>
+  <br />
+
+  <!-- Link to the login page for users who are already registered -->
+  <div class="text-center">
+    <p>Already registered?</p>
+    <a class="btn btn-outline-dark text-white" href="{% url 'user-login' %}"
+      >Login</a
+    >
+  </div>
+</div>
+{% endblock %}

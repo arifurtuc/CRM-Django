@@ -1,1 +1,6 @@
 /* Custom CSS */
+
+.registration-form {
+  width: 450px;
+  margin: auto;
+}
