@@ -1,1 +1,15 @@
-<h1>Homepage</h1>
+{% extends 'clientapp/base.html' %}
+
+<!-- Content block for the homepage -->
+{% block content %}
+<div class="text-center">
+  <br />
+  <h2>Client Hub - A Django CRM</h2>
+  <br />
+  <h5>Efficiency Begins with Effective Client Records!</h5>
+  <hr />
+
+  <!-- Button to create a new user profile -->
+  <a class="btn btn-dark" type="button" href="">Create Profile</a>
+</div>
+{% endblock content %}
