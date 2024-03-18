@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import RegistrationForm, LoginForm
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 
 # Homepage
 def home(request):
@@ -54,7 +55,7 @@ def user_login(request):
 
             if user is not None:
                 auth.login(request, user)
-                #return redirect('')
+                return redirect('client-dashboard')
 
     context = {'form':form}
     return render(request, 'clientapp/user-login.html', context=context)
@@ -68,3 +69,8 @@ def user_logout(request):
     """
     auth.logout(request)
     return redirect('user-login')
+
+# Dashboard
+@login_required(login_url='user-login')
+def client_dashboard(request):
+    return render(request, 'clientapp/client-dashboard.html')

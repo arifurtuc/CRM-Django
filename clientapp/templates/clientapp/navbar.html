@@ -21,10 +21,10 @@
         <!-- Navigation items -->
         {% if user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" href="">Dashboard</a>
+          <a class="nav-link" href="{% url 'client-dashboard' %}">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Sign out</a>
+          <a class="nav-link" href="{% url 'user-logout' %}">Sign out</a>
         </li>
         {% else %}
         <li class="nav-item">
