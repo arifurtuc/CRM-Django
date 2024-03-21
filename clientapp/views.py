@@ -3,6 +3,7 @@ from .forms import RegistrationForm, LoginForm
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
+from .models import Client
 
 # Homepage
 def home(request):
@@ -73,4 +74,11 @@ def user_logout(request):
 # Dashboard
 @login_required(login_url='user-login')
 def client_dashboard(request):
-    return render(request, 'clientapp/client-dashboard.html')
+    """
+    View function for rendering the client dashboard page.
+
+    Requires user authentication; redirects to the login page if not authenticated.
+    """
+    clients = Client.objects.all()
+    context = {'clients': clients}
+    return render(request, 'clientapp/client-dashboard.html', context=context)
