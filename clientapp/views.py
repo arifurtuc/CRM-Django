@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import RegistrationForm, LoginForm
+from .forms import RegistrationForm, LoginForm, AddClientForm
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
@@ -82,3 +82,22 @@ def client_dashboard(request):
     clients = Client.objects.all()
     context = {'clients': clients}
     return render(request, 'clientapp/client-dashboard.html', context=context)
+
+# Add client
+@login_required(login_url='user-login')
+def add_client(request):
+    """
+    View function to handle adding a new client.
+    
+    Requires the user to be logged in. If the request method is POST and the form is valid,
+    the client data is saved and the user is redirected to the client dashboard.
+    """
+    form = AddClientForm()
+    if request.method == 'POST':
+        form = AddClientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('client-dashboard')
+        
+    context = {'form':form}
+    return render(request, 'clientapp/add-client.html', context=context)

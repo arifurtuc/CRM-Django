@@ -5,13 +5,16 @@
 <div class="client-dashboard text-center">
   <h4>Welcome to the dashboard! {{user}}</h4>
   <hr />
-  <a class="btn btn-outline-dark text-white" type="button" href=""
+  <a
+    class="btn btn-outline-dark text-white"
+    type="button"
+    href="{% url 'add-client' %}"
     >Add New Client</a
   >
   <hr />
 
   <!-- Table to display client information -->
-  <div class="table-responsive">
+  <div class="table-responsive client-table">
     <table class="table table-hover table-bordered">
       <thead>
         <tr class="table-dark">
