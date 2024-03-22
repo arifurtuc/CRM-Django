@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from .models import Client
 from django.urls import reverse
+from django.contrib import messages
 
 # Homepage
 def home(request):
@@ -31,6 +32,7 @@ def register(request):
 
         if form.is_valid():
             form.save()
+            messages.success(request, "Your account has been created successfully!")
             return redirect('user-login')
     
     context = {'form':form}
@@ -70,6 +72,7 @@ def user_logout(request):
     Logs out the currently logged-in user and redirects to the login page.
     """
     auth.logout(request)
+    messages.success(request, "You have been logged out successfully!")
     return redirect('user-login')
 
 # Dashboard
@@ -98,6 +101,7 @@ def add_client(request):
         form = AddClientForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Client info has been added successfully!")
             return redirect('client-dashboard')
         
     context = {'form':form}
@@ -128,6 +132,7 @@ def update_client(request, pk):
         form = UpdateClientForm(request.POST, instance=client)
         if form.is_valid:
             form.save()
+            messages.success(request, "Client info has been updated successfully!")
             return redirect(reverse('client-details', kwargs={'pk': pk}))
         
     context = {'form':form}
@@ -143,5 +148,6 @@ def delete_client(request, pk):
     """
     client = Client.objects.get(id=pk)
     client.delete()
+    messages.success(request, "Client info has been deleted successfully!")
 
     return redirect('client-dashboard')

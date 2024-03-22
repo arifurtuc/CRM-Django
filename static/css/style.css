@@ -26,3 +26,8 @@
   border-radius: 5px;
   margin-right: 5px;
 }
+
+#alert-message-text{
+  background-image: none;
+  font-size: large;
+}
