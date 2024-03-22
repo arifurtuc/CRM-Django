@@ -1,18 +1,18 @@
 {% extends "clientapp/base.html" %} {% load crispy_forms_tags %}
 
-<!-- Content block for the Add Client form -->
+<!-- Content block for the Update Client form -->
 {% block content %}
 <div class="client-form">
   <br />
-  <h3 class="text-center">Add Client Information</h3>
+  <h3 class="text-center">Update Client Information</h3>
   <hr />
 
-  <!-- Form for adding client -->
+  <!-- Form for updating client -->
   <form method="POST" autocomplete="off">
     {% csrf_token %} {{form|crispy}}
     <br />
     <button type="submit" class="btn btn-dark w-100 btn-block p-2">
-      Add Client
+      Update Client
     </button>
   </form>
 </div>

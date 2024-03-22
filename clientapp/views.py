@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
-from .forms import RegistrationForm, LoginForm, AddClientForm
+from .forms import RegistrationForm, LoginForm, AddClientForm, UpdateClientForm
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from .models import Client
+from django.urls import reverse
 
 # Homepage
 def home(request):
@@ -111,3 +112,17 @@ def view_client(request, pk):
     client = Client.objects.get(id=pk)
     context = {'client':client}
     return render(request, 'clientapp/client-details.html', context=context)
+
+# Update client
+@login_required(login_url='user-login')
+def update_client(request, pk):
+    client = Client.objects.get(id=pk)
+    form = UpdateClientForm(instance=client)
+    if request.method == 'POST':
+        form = UpdateClientForm(request.POST, instance=client)
+        if form.is_valid:
+            form.save()
+            return redirect(reverse('client-details', kwargs={'pk': pk}))
+        
+    context = {'form':form}
+    return render(request, 'clientapp/update-client.html', context=context)

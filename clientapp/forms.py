@@ -25,3 +25,11 @@ class AddClientForm(forms.ModelForm):
         model = Client
         # Define the fields to be included in the form
         fields = ['first_name','last_name','email','phone','street_name','city','province','country']
+
+# Form for updating client info
+class UpdateClientForm(forms.ModelForm):
+    class Meta:
+        # Specify the model for the form
+        model = Client
+        # Define the fields to be included in the form
+        fields = ['first_name','last_name','email','phone','street_name','city','province','country']

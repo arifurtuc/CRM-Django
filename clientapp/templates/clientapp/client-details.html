@@ -38,7 +38,11 @@
       class="btn btn-outline-dark text-white"
       >Dashboard</a
     >
-    <a href="" class="btn btn-outline-dark text-white">Update</a>
+    <a
+      href="{% url 'update-client' client.id %}"
+      class="btn btn-outline-dark text-white"
+      >Update</a
+    >
     <a href="" class="btn btn-outline-dark text-white">Delete</a>
   </div>
   <div class="card-footer text-body-secondary text-center">
