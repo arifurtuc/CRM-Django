@@ -2,15 +2,15 @@
 
 <!-- Content block for the client dashboard -->
 {% block content %}
-<div class="client-dashboard text-center">
+<div class="text-center">
   <h4>Welcome to the dashboard! {{user}}</h4>
   <hr />
   <a
     class="btn btn-outline-dark text-white"
     type="button"
     href="{% url 'add-client' %}"
-    >Add New Client</a
-  >
+    >Add New Client <i class="fa fa-plus-circle" aria-hidden="true"></i
+  ></a>
   <hr />
 
   <!-- Table to display client information -->
@@ -46,7 +46,7 @@
           <th scope="col">{{ client.date_created }}</th>
           <td>
             <a
-              class="btn btn-dark btn-sm"
+              class="btn btn-success btn-sm"
               href="{% url 'client-details' client.id %}"
             >
               <i class="fa fa-eye" aria-hidden="true"></i>

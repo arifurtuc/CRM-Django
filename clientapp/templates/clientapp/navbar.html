@@ -21,10 +21,14 @@
         <!-- Navigation items -->
         {% if user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'client-dashboard' %}">Dashboard</a>
+          <a class="nav-link" href="{% url 'client-dashboard' %}"
+            >Dashboard <i class="fa fa-home" aria-hidden="true"></i
+          ></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'user-logout' %}">Sign out</a>
+          <a class="nav-link" href="{% url 'user-logout' %}"
+            >Sign out <i class="fa fa-sign-out" aria-hidden="true"></i
+          ></a>
         </li>
         {% else %}
         <li class="nav-item">
