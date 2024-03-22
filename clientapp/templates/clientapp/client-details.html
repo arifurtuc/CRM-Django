@@ -1,0 +1,48 @@
+{% extends 'clientapp/base.html' %}
+
+<!-- Content block for the client details -->
+{% block content %}
+<div class="card client-details">
+  <div class="card-body">
+    <h4 class="card-title text-center">Client Details</h4>
+    <hr />
+    <p class="card-text">
+      <span class="highlighted-text">ID</span>{{ client.id }}
+    </p>
+    <p class="card-text">
+      <span class="highlighted-text">First Name</span>{{ client.first_name }}
+    </p>
+    <p class="card-text">
+      <span class="highlighted-text">Last Name</span>{{ client.last_name }}
+    </p>
+    <p class="card-text">
+      <span class="highlighted-text">Email</span>{{ client.email }}
+    </p>
+    <p class="card-text">
+      <span class="highlighted-text">Phone Number</span>{{ client.phone }}
+    </p>
+    <p class="card-text">
+      <span class="highlighted-text">Stree Name</span> {{ client.street_name }}
+    </p>
+    <p class="card-text">
+      <span class="highlighted-text">City</span> {{ client.city }}
+    </p>
+    <p class="card-text">
+      <span class="highlighted-text">Province</span>{{ client.province }}
+    </p>
+    <p class="card-text">
+      <span class="highlighted-text">Country</span>{{ client.country }}
+    </p>
+    <a
+      href="{% url 'client-dashboard' %}"
+      class="btn btn-outline-dark text-white"
+      >Dashboard</a
+    >
+    <a href="" class="btn btn-outline-dark text-white">Update</a>
+    <a href="" class="btn btn-outline-dark text-white">Delete</a>
+  </div>
+  <div class="card-footer text-body-secondary text-center">
+    Created at {{ client.date_created }}
+  </div>
+</div>
+{% endblock content %}

@@ -45,7 +45,10 @@
           <th scope="col">{{ client.country }}</th>
           <th scope="col">{{ client.date_created }}</th>
           <td>
-            <a class="btn btn-dark btn-sm" href="">
+            <a
+              class="btn btn-dark btn-sm"
+              href="{% url 'client-details' client.id %}"
+            >
               <i class="fa fa-eye" aria-hidden="true"></i>
             </a>
           </td>

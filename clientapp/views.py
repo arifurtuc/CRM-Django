@@ -101,3 +101,13 @@ def add_client(request):
         
     context = {'form':form}
     return render(request, 'clientapp/add-client.html', context=context)
+
+# View client details
+@login_required(login_url='user-login')
+def view_client(request, pk):
+    """
+    View function to display details of a specific client.
+    """
+    client = Client.objects.get(id=pk)
+    context = {'client':client}
+    return render(request, 'clientapp/client-details.html', context=context)
