@@ -43,7 +43,11 @@
       class="btn btn-outline-dark text-white"
       >Update</a
     >
-    <a href="" class="btn btn-outline-dark text-white">Delete</a>
+    <a
+      href="{% url 'delete-client' client.id %}"
+      class="btn btn-outline-dark text-white"
+      >Delete</a
+    >
   </div>
   <div class="card-footer text-body-secondary text-center">
     Created at {{ client.date_created }}

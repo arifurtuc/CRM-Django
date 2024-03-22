@@ -116,6 +116,12 @@ def view_client(request, pk):
 # Update client
 @login_required(login_url='user-login')
 def update_client(request, pk):
+    """
+    View function to update client details.
+
+    If the request method is POST and the form is valid, redirects to the client details page.
+    Otherwise, renders the update client form template.
+    """
     client = Client.objects.get(id=pk)
     form = UpdateClientForm(instance=client)
     if request.method == 'POST':
@@ -126,3 +132,16 @@ def update_client(request, pk):
         
     context = {'form':form}
     return render(request, 'clientapp/update-client.html', context=context)
+
+# Delete client
+@login_required(login_url='user-login')
+def delete_client(request, pk):
+    """
+    View function to delete client.
+
+    Redirects to the client dashboard after deleting the client.
+    """
+    client = Client.objects.get(id=pk)
+    client.delete()
+
+    return redirect('client-dashboard')
