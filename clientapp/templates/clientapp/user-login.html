@@ -9,7 +9,9 @@
 
   <!-- Form for user login -->
   <form method="POST" autocomplete="off">
-    {% csrf_token %} {{form|crispy}}
+    {% csrf_token %} {{form.username|as_crispy_field}}
+    <br />
+    {{form.password|as_crispy_field}}
     <br />
     <button type="submit" class="btn btn-dark w-100 btn-block p-2">
       Login

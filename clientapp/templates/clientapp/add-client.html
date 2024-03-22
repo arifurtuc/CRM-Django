@@ -9,11 +9,33 @@
 
   <!-- Form for adding client -->
   <form method="POST" autocomplete="off">
-    {% csrf_token %} {{form|crispy}}
+    {% csrf_token %} {{form.first_name|as_crispy_field}}
+    <br />
+    {{form.last_name|as_crispy_field}}
+    <br />
+    {{form.email|as_crispy_field}}
+    <br />
+    {{form.phone|as_crispy_field}}
+    <br />
+    {{form.street_name|as_crispy_field}}
+    <br />
+    {{form.city|as_crispy_field}}
+    <br />
+    {{form.province|as_crispy_field}}
+    <br />
+    {{form.country|as_crispy_field}}
     <br />
     <button type="submit" class="btn btn-dark w-100 btn-block p-2">
       Add Client
     </button>
   </form>
+  <br />
+  <div class="text-center">
+    <a
+      href="{% url 'client-dashboard' %}"
+      class="btn btn-outline-dark text-white"
+      >Return to Dashboard <i class="fa fa-arrow-left" aria-hidden="true"></i
+    ></a>
+  </div>
 </div>
 {% endblock %}
