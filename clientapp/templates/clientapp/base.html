@@ -40,6 +40,11 @@
             <i class="fa fa-check-circle-o" aria-hidden="true"></i> {{ message }}
           </p>
           <br />
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+          <p class="alert alert-warning float-center text-center" id="alert-message-text">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ message }}
+          </p>
+          <br />  
         {% endif %} 
       {% endfor %} 
 

@@ -9,9 +9,15 @@
   <h5>Efficiency Begins with Effective Client Records!</h5>
   <hr />
 
-  <!-- Button to create a new user profile -->
-  <a class="btn btn-dark" type="button" href="{% url 'register' %}"
-    >Create You Account <i class="fa fa-user-plus" aria-hidden="true"></i
-  ></a>
+  {% if logged_in %}
+      <p>You are currently logged in as {{ user }}</p>
+  {% else %}
+      <!-- Button to create a new user profile -->
+      <a class="btn btn-dark" type="button" href="{% url 'register' %}"
+        >Create Your Account <i class="fa fa-user-plus" aria-hidden="true"></i>
+      </a>
+  {% endif %}
+
+  
 </div>
 {% endblock content %}

@@ -15,7 +15,9 @@ def home(request):
     This function renders the 'index.html' template,
     which represents the homepage of the CRM application.
     """
-    return render(request, 'clientapp/index.html')
+    if request.user.is_authenticated:
+        return render(request, 'clientapp/index.html', {'logged_in': True})
+    return render(request, 'clientapp/index.html', {'logged_in': False})
 
 # User Registration
 def register(request):
@@ -25,18 +27,24 @@ def register(request):
     Renders the registration form for new users.
     If the form is submitted with valid data, it saves the user and redirects to the login page.
     """
-    form = RegistrationForm()
+    if request.user.is_authenticated:
+        # If the user is already logged in, redirect them to the index page
+        messages.error(request, "Please log out from the current account before creating another account!")
+        return redirect('home')
+    else:
+        # If the user is not logged in, render the registration page
+        form = RegistrationForm()
 
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
+        if request.method == 'POST':
+            form = RegistrationForm(request.POST)
 
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Your account has been created successfully!")
-            return redirect('user-login')
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Your account has been created successfully!")
+                return redirect('user-login')
     
-    context = {'form':form}
-    return render(request, 'clientapp/register.html', context=context)
+        context = {'form':form}
+        return render(request, 'clientapp/register.html', context=context)
 
 # User Login
 def user_login(request):
