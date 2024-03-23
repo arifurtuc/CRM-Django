@@ -54,23 +54,28 @@ def user_login(request):
     Renders the login form for existing users.
     If the form is submitted with valid credentials, it authenticates the user and logs them in.
     """
-    form = LoginForm()
+    if request.user.is_authenticated:
+        # If the user is already logged in, redirect them to the index page
+        messages.error(request, "You are already logged in!")
+        return redirect('home')
+    else:    
+        form = LoginForm()
 
-    if request.method == 'POST':
-        form = LoginForm(request, data=request.POST)
+        if request.method == 'POST':
+            form = LoginForm(request, data=request.POST)
 
-        if form.is_valid():
-            username = request.POST.get('username')
-            password = request.POST.get('password')
+            if form.is_valid():
+                username = request.POST.get('username')
+                password = request.POST.get('password')
 
-            user = authenticate(request, username=username, password=password)
+                user = authenticate(request, username=username, password=password)
 
-            if user is not None:
-                auth.login(request, user)
-                return redirect('client-dashboard')
+                if user is not None:
+                    auth.login(request, user)
+                    return redirect('client-dashboard')
 
-    context = {'form':form}
-    return render(request, 'clientapp/user-login.html', context=context)
+        context = {'form':form}
+        return render(request, 'clientapp/user-login.html', context=context)
 
 # User Logout
 def user_logout(request):
