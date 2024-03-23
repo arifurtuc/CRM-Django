@@ -1,7 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Define a model for storing client information
 class Client(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=4) 
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
     email = models.CharField(max_length=300)

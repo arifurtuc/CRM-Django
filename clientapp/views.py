@@ -96,7 +96,7 @@ def client_dashboard(request):
 
     Requires user authentication; redirects to the login page if not authenticated.
     """
-    clients = Client.objects.all()
+    clients = Client.objects.filter(user=request.user)
     context = {'clients': clients}
     return render(request, 'clientapp/client-dashboard.html', context=context)
 
@@ -113,7 +113,9 @@ def add_client(request):
     if request.method == 'POST':
         form = AddClientForm(request.POST)
         if form.is_valid():
-            form.save()
+            client = form.save(commit=False)
+            client.user = request.user  # Associate the client with the logged-in user
+            client.save()
             messages.success(request, "Client info has been added successfully!")
             return redirect('client-dashboard')
         
@@ -144,7 +146,9 @@ def update_client(request, pk):
     if request.method == 'POST':
         form = UpdateClientForm(request.POST, instance=client)
         if form.is_valid:
-            form.save()
+            client = form.save(commit=False)
+            client.user = request.user  # Associate the client with the logged-in user
+            client.save()
             messages.success(request, "Client info has been updated successfully!")
             return redirect(reverse('client-details', kwargs={'pk': pk}))
         
@@ -160,6 +164,12 @@ def delete_client(request, pk):
     Redirects to the client dashboard after deleting the client.
     """
     client = Client.objects.get(id=pk)
+
+    # Check if the client belongs to the current user
+    if client.user != request.user:
+        messages.error(request, "You are not authorized to delete this client.")
+        return redirect('client-dashboard')
+    
     client.delete()
     messages.success(request, "Client info has been deleted successfully!")
 
