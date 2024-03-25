@@ -67,4 +67,5 @@ A Django based CRM Application where user can manage client information.
 - JavaScript
 - MySQL
 
-![Screenshot 2024-03-25 at 15 28 47](https://github.com/arifurtuc/CRM-Django/assets/47160627/e0f481b3-e290-41dd-b430-eb642ef366b7)
+![crm-django](https://github.com/arifurtuc/CRM-Django/assets/47160627/375ab2b4-b2e2-4b44-ab37-053d1caa14c5)
+
